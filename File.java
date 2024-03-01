@@ -1,2 +1,4 @@
-package livecoding;public enum File {
+package livecoding;
+
+public enum File {
 }

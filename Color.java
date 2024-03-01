@@ -1,2 +1,4 @@
-package livecoding;public enum Color {
+package livecoding;
+
+public enum Color {
 }

@@ -1,2 +1,4 @@
-package livecoding;public class Board {
+package livecoding;
+
+public class Board {
 }

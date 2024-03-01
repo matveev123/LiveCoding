@@ -1,2 +1,4 @@
-package livecoding;public class Coordinates {
+package livecoding;
+
+public class Coordinates {
 }

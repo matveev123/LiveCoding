@@ -1,4 +1,7 @@
-package livecoding;
+package livecoding.piece;
+
+import livecoding.Color;
+import livecoding.Coordinates;
 
 public abstract class Piece {
 
