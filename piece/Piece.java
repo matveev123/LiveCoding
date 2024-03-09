@@ -5,8 +5,9 @@ import livecoding.Coordinates;
 
 public abstract class Piece {
 
-    Color color;
-    Coordinates coordinates;
+    public Color color;
+    public Coordinates coordinates;
+
 
     public Piece(Color color, Coordinates coordinates) {
         this.color = color;
