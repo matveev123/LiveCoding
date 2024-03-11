@@ -1,13 +1,1 @@
-package livecoding;
-
-public class Main {
-    public static void main(String[] args) {
-        Board board = new Board();
-        board.setDefaultPiecesPositions();
-
-        BoardConsoleRenderer renderer = new BoardConsoleRenderer();
-        renderer.render(board);
-
-
-    }
-}
+package livecoding;import livecoding.piece.Piece;import java.util.Set;public class Main {    public static void main(String[] args) {        Board board = new Board();        board.setDefaultPiecesPositions();////        BoardConsoleRenderer renderer = new BoardConsoleRenderer();//        renderer.render(board);//////        System.out.println(Character.toString(128_512 ));//        Piece piece = board.getPiece(new Coordinates(File.B, 1));//        Set<Coordinates> availableMoveSquares = piece.getAvailableMoveSquares(board);//        int i = 123;        Game game = new Game(board);        game.gameLoop();    }    /*    1. иерахию классов фигур   2.доску   3.ПЕРЕМЕЩЕНИЕ ФИГУР   4.ВВОД С КОНСОЛИ   5. БАЗООВЫЙ ИГРОВОЙ ЦИКЛ   САОМЕ СЛОЖНЕО ЛОШГРКА     */}

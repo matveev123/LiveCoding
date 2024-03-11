@@ -26,13 +26,12 @@ public class BoardConsoleRenderer {
                 }
             }
             line += ANSI_RESET;
-            System.out.printf("%2s", line);
-            System.out.println();
+            System.out.println(line);
         }
     }
 
     public String colorizedSprite(String sprite, Color pieceColor, boolean isSquareDark) {
-// format = background color + front color + text/;
+        // format = background color + front color + text/;
 
         String result = sprite;
 
@@ -75,10 +74,10 @@ public class BoardConsoleRenderer {
     }
 
     public String getSpriteForEmptySquare(Coordinates coordinates) {
-        return colorizedSprite("   ", Color.WHITE, Board.isSquareDark(coordinates));
+        return colorizedSprite("    ", Color.WHITE, Board.isSquareDark(coordinates));
     }
 
     private String getPieceSprite(Piece piece) {
-        return colorizedSprite(setPieceUnicodeSpriteForPiece(piece) + " ", piece.color, Board.isSquareDark(piece.coordinates));
+        return colorizedSprite(" "+setPieceUnicodeSpriteForPiece(piece) + " ", piece.color, Board.isSquareDark(piece.coordinates));
     }
 }

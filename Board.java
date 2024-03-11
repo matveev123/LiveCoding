@@ -57,4 +57,16 @@ public class Board {
     public static boolean isSquareDark(Coordinates coordinates) {
         return (((coordinates.file.ordinal() + 1) + coordinates.rank) % 2) == 0;
     }
+
+    public void removePiece(Coordinates coordinates){
+        pieces.remove(coordinates);
+    }
+
+    public void movePiece(Coordinates from,Coordinates to){
+        Piece piece = getPiece(from);
+
+        removePiece(from);
+
+        setPiece(to,piece);
+    }
 }
