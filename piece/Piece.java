@@ -20,7 +20,6 @@ public abstract class Piece {
 
     public Set<Coordinates> getAvailableMoveSquares(Board board) {
         Set<Coordinates> result = new HashSet<>();
-
         for (CoordinatesShift shift : getPieceMoves()) {
             if (coordinates.canShift(shift)) {
                 Coordinates newCoordinates = coordinates.shift(shift);
@@ -33,9 +32,9 @@ public abstract class Piece {
         return result;
     }
 
-    boolean isSquareAvailableForMove(Coordinates coordinates, Board board) {
+    protected boolean isSquareAvailableForMove(Coordinates coordinates, Board board) {
         return board.isSquareIsEmpty(coordinates) || board.getPiece(coordinates).color != color;
     }
 
-    protected abstract Set<CoordinatesShift> getPieceMoves();
+    protected abstract Set<CoordinatesShift> getPieceMoves();// почему protected?
 }

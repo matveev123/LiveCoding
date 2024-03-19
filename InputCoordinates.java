@@ -11,7 +11,7 @@ public class InputCoordinates {
 
     public static Coordinates input() {
         while (true) {
-            System.out.println("Please, enter cooordinates (ex. a1)");
+            System.out.println("Please, enter coordinates (ex. a1)");
 
             String line = scanner.nextLine();
 
@@ -45,7 +45,7 @@ public class InputCoordinates {
         }
     }
 
-    public static Coordinates inputPieceCoordinatesForColor(Color color, Board board) {
+    public static Coordinates inputPieceCoordinatesForColor(Color color, Board board) {//Color
         while (true) {
             System.out.println("Enter coordinates for a piece to move!");
             Coordinates coordinates = input();
@@ -74,7 +74,7 @@ public class InputCoordinates {
         while (true) {
             System.out.println("Please, enter your move for selected piece!");
             Coordinates input = input();
-            if (!coordinates.contains(input)) {
+            if (!coordinates.contains(input)) {// круто
                 System.out.println("Non-available square!");
                 continue;
             }

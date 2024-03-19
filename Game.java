@@ -4,14 +4,16 @@ import livecoding.piece.Piece;
 
 import java.util.Set;
 
-/*
-           1. рендер доски.
-           2.читать ввод с консоли
-           3.ход.
-           4. переход хода pass
-            */
+
+
 public class Game {
 
+    /*
+               1. рендер доски.
+               2.читать ввод с консоли
+               3.ход.
+               4. переход хода pass
+                */
     private final Board board;
 
 
@@ -40,13 +42,15 @@ public class Game {
 
             Set<Coordinates> availableMoveSquares = piece.getAvailableMoveSquares(board);
 
+            renderer.render(board,piece);
+
             Coordinates targetCoordinates = InputCoordinates.inputAvailableSquare(availableMoveSquares);
 
             board.movePiece(sourceCoordinates, targetCoordinates);
 
 
             // pass move
-            isWhiteToMove = !isWhiteToMove;//!
+            isWhiteToMove = !isWhiteToMove;
         }
     }
 }
