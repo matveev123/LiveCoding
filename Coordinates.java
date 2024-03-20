@@ -16,7 +16,7 @@ public class Coordinates {
         return new Coordinates(File.values()[this.file.ordinal() + shift.fileShift], this.rank + shift.rankShift);
     }
 
-    public boolean canShift(CoordinatesShift shift) {//!
+    public boolean canShift(CoordinatesShift shift) {
         int f = file.ordinal() + shift.fileShift;
         int r = rank + shift.rankShift;
         if ((f < 0) || (f > 7)) return false;

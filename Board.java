@@ -9,7 +9,7 @@ public class Board {
     HashMap<Coordinates, Piece> pieces = new HashMap<>();
 
     public void setPiece(Coordinates coordinates, Piece piece) {
-        piece.coordinates = coordinates;//!
+        piece.coordinates = coordinates;
         pieces.put(coordinates, piece);
     }
 
@@ -47,7 +47,7 @@ public class Board {
     }
 
     public boolean isSquareIsEmpty(Coordinates coordinates) {
-        return !pieces.containsKey(coordinates);//ключ
+        return !pieces.containsKey(coordinates);
     }
 
     public Piece getPiece(Coordinates coordinates) {

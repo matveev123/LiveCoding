@@ -7,8 +7,7 @@ public class BoardFactory {
 
     public Board boardFEN(String fen) {
         Board board = new Board();
-        //rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-        // построчный декодинг!
+
 
         String[] parts = fen.split(" ");
         String piecePositions = parts[0];
