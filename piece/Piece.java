@@ -37,4 +37,28 @@ public abstract class Piece {
     }
 
     protected abstract Set<CoordinatesShift> getPieceMoves();// почему protected?
+
+    protected Set<CoordinatesShift> getPiecesAttacks() {
+        return getPieceMoves();
+    }
+
+    public Set<Coordinates> getAttackedSquares(Board board) {// куда фигура может атковать
+        Set<CoordinatesShift> piecesAttacks = getPiecesAttacks();//сдвиги
+        Set<Coordinates> result = new HashSet();//онкретные клетки
+
+        for (CoordinatesShift piecesAttack : piecesAttacks) {
+            if (coordinates.canShift(piecesAttack)) {
+                Coordinates shiftedCoordinates = coordinates.shift(piecesAttack);//тек координаты фигуры сдвинуты на сдвиг(pieceAttack)
+                if(isSquareAvailableForAttack(shiftedCoordinates,board)){
+                    result.add(shiftedCoordinates);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    protected boolean isSquareAvailableForAttack(Coordinates coordinates, Board board) {
+        return true;
+    }
 }

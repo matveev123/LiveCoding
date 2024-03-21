@@ -3,7 +3,6 @@ package livecoding.piece;
 import livecoding.Color;
 import livecoding.Coordinates;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Bishop extends LongRagePiece implements IBishop {

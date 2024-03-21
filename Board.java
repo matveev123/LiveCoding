@@ -2,7 +2,10 @@ package livecoding;
 
 import livecoding.piece.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 public class Board {
 
@@ -68,5 +71,34 @@ public class Board {
         removePiece(from);
 
         setPiece(to, piece);
+    }
+
+    private List<Piece> getPiecesBeColor(Color color) {
+        List<Piece> result = new ArrayList<>();
+
+        for (Piece piece : pieces.values()) {
+            if (piece.color == color) {
+                result.add(piece);
+            }
+        }
+        return result;
+
+
+    }
+
+    public boolean isSquareAttackedByColor(Coordinates coordinates, Color color) {//клетка не под боем
+        List<Piece> pieces = getPiecesBeColor(color);
+
+
+        for (Piece piece : pieces) {// се фигуры врага
+            Set<Coordinates> attackedSquares = piece.getAttackedSquares(this);// куда они могут атаковать || клетки которые атакует вражеская фигура
+            if(attackedSquares.contains(coordinates))
+            {
+                return true;// клекта под боем
+            }
+
+        }
+
+        return false;
     }
 }
