@@ -1,6 +1,6 @@
 package livecoding.piece;
 
-import livecoding.Board;
+import livecoding.board.Board;
 import livecoding.Color;
 import livecoding.Coordinates;
 
@@ -33,7 +33,7 @@ public abstract class Piece {
     }
 
     protected boolean isSquareAvailableForMove(Coordinates coordinates, Board board) {
-        return board.isSquareIsEmpty(coordinates) || board.getPiece(coordinates).color != color;
+        return board.isSquareEmpty(coordinates) || board.getPiece(coordinates).color != color;
     }
 
     protected abstract Set<CoordinatesShift> getPieceMoves();// почему protected?
@@ -44,11 +44,11 @@ public abstract class Piece {
 
     public Set<Coordinates> getAttackedSquares(Board board) {// куда фигура может атковать
         Set<CoordinatesShift> piecesAttacks = getPiecesAttacks();//сдвиги
-        Set<Coordinates> result = new HashSet();//онкретные клетки
+        Set<Coordinates> result = new HashSet();//конкретные клетки
 
         for (CoordinatesShift piecesAttack : piecesAttacks) {
-            if (coordinates.canShift(piecesAttack)) {
-                Coordinates shiftedCoordinates = coordinates.shift(piecesAttack);//тек координаты фигуры сдвинуты на сдвиг(pieceAttack)
+            if (coordinates.canShift(piecesAttack)) {// Чтобы атака не выходила за рамки доски
+                Coordinates shiftedCoordinates = coordinates.shift(piecesAttack);//те координаты фигуры сдвинуты на сдвиг(pieceAttack)
                 if(isSquareAvailableForAttack(shiftedCoordinates,board)){
                     result.add(shiftedCoordinates);
                 }

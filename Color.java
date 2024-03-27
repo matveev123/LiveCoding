@@ -4,6 +4,6 @@ public enum Color {
     WHITE, BLACK;
 
     public Color opposite() {
-        return (this == Color.WHITE ? BLACK : WHITE);
+        return this == Color.WHITE ? BLACK : WHITE;
     }
 }

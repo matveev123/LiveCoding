@@ -1,6 +1,11 @@
 package livecoding;
 
+import livecoding.board.Board;
+import livecoding.board.BoardFactory;
+import livecoding.board.Move;
+import livecoding.piece.King;
 import livecoding.piece.Piece;
+
 
 import java.util.Scanner;
 import java.util.Set;
@@ -49,7 +54,7 @@ public class InputCoordinates {
         while (true) {
             System.out.println("Enter coordinates for a piece to move!");
             Coordinates coordinates = input();
-            if (board.isSquareIsEmpty(coordinates)) {
+            if (board.isSquareEmpty(coordinates)) {
                 System.out.println("Empty square!");
                 continue;
             }
@@ -82,15 +87,33 @@ public class InputCoordinates {
         }
     }
 
-    public static void main(String[] args) {
-//        Coordinates coordinates = input();
+    public static Move inputMove(Board board, Color color, BoardConsoleRenderer renderer) {
+        while (true) {
+            Coordinates sourceCoordinates = InputCoordinates.inputPieceCoordinatesForColor(color, board);
 
-        Board board = new Board();
-        board.setDefaultPiecesPositions();
+            Piece piece = board.getPiece(sourceCoordinates);
+            Set<Coordinates> availableMoveSquares = piece.getAvailableMoveSquares(board);
 
-        Coordinates coordinates = inputPieceCoordinatesForColor(Color.WHITE, board);
-        System.out.println("coordinates = " + coordinates);
+            renderer.render(board, piece);
 
+            Coordinates targetCoordinates = InputCoordinates.inputAvailableSquare(availableMoveSquares);
 
+            Move move = new Move(sourceCoordinates, targetCoordinates);
+
+            if (validateIfKingInCheckAfterMove(board, color, move)) {
+                System.out.println("Your king is under attack!");
+                continue;
+            }
+            return move;
+        }
+    }
+
+    private static boolean validateIfKingInCheckAfterMove(Board board, Color color, Move move) {
+        Board copy = (new BoardFactory()).copy(board);
+        copy.makeMove(move);
+
+        // we trust that king on the board!100 procent!
+        Piece king = copy.getPiecesByColor(color).stream().filter(piece -> piece instanceof King).findFirst().get();
+        return copy.isSquareAttackedByColor(king.coordinates, color.opposite());
     }
 }

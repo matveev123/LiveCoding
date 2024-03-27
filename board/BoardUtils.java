@@ -1,10 +1,12 @@
-package livecoding;
+package livecoding.board;
+
+import livecoding.Coordinates;
+import livecoding.File;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BoardUtils {
-
     public static List<Coordinates> getDiagonalCoordinatesBetween(Coordinates source, Coordinates target) {
         List<Coordinates> result = new ArrayList<>();
 
@@ -13,7 +15,10 @@ public class BoardUtils {
 
 
         for (
-                int fileIndex = source.file.ordinal() + fileShift, rank = source.rank + rankShift; rank != target.rank && fileIndex != target.file.ordinal(); fileIndex += fileShift, rank += rankShift
+                int fileIndex = source.file.ordinal() + fileShift,
+                rank = source.rank + rankShift;
+                fileIndex != target.file.ordinal() && rank != target.rank;
+                fileIndex += fileShift, rank += rankShift
         ) {
             result.add(new Coordinates(File.values()[fileIndex], rank));
         }
@@ -47,11 +52,6 @@ public class BoardUtils {
 
     }
 
-    public static void main(String[] args) {
 
-        List<Coordinates> list = getHorizontalCoordinatesBetween(new Coordinates(File.A, 4), new Coordinates(File.H, 4));
-        System.out.println("list = " + list);
-
-    }
 }
 

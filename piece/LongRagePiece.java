@@ -1,7 +1,7 @@
 package livecoding.piece;
 
-import livecoding.Board;
-import livecoding.BoardUtils;
+import livecoding.board.Board;
+import livecoding.board.BoardUtils;
 import livecoding.Color;
 import livecoding.Coordinates;
 
@@ -33,7 +33,7 @@ public abstract class LongRagePiece extends Piece {
             coordinatesBetween = BoardUtils.getDiagonalCoordinatesBetween(this.coordinates, coordinates);
         }
         for (Coordinates c : coordinatesBetween) {
-            if (!board.isSquareIsEmpty(c)) {
+            if (!board.isSquareEmpty(c)) {
                 return false;
             }
         }

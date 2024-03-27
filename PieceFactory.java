@@ -4,7 +4,7 @@ import livecoding.piece.*;
 
 public class PieceFactory {
 
-    Piece fromFenChar(char fenChar,Coordinates coordinates) {
+    public Piece fromFenChar(char fenChar,Coordinates coordinates) {
         switch (fenChar){
             case 'p':
                 return new Pawn(Color.BLACK, coordinates);

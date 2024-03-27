@@ -1,5 +1,6 @@
 package livecoding;
 
+import livecoding.board.Board;
 import livecoding.piece.Piece;
 
 import java.util.Set;
@@ -31,7 +32,7 @@ public class BoardConsoleRenderer {
                 Coordinates coordinates = new Coordinates(file, rank);
                 boolean isHighLight = availableMoveSquares.contains(coordinates);
 
-                if (board.isSquareIsEmpty(coordinates)) {
+                if (board.isSquareEmpty(coordinates)) {
                     line += getSpriteForEmptySquare(coordinates, isHighLight);//blank
                 } else {
                     line += getPieceSprite(board.getPiece(coordinates), isHighLight);

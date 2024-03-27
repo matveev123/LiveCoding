@@ -1,19 +1,47 @@
-package livecoding;
+package livecoding.board;
 
+import livecoding.Color;
+import livecoding.Coordinates;
+import livecoding.File;
 import livecoding.piece.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Board {
+    public final String startingFen;
+    public HashMap<Coordinates, Piece> pieces = new HashMap<>();
 
-    HashMap<Coordinates, Piece> pieces = new HashMap<>();
+    public List<Move> moves = new ArrayList<>();
+    public Board(String startingFen) {
+
+        this.startingFen = startingFen;
+    }
 
     public void setPiece(Coordinates coordinates, Piece piece) {
         piece.coordinates = coordinates;
         pieces.put(coordinates, piece);
+    }
+    public void removePiece(Coordinates coordinates) {
+        pieces.remove(coordinates);
+    }
+
+    public void makeMove(Move move) {
+        Piece piece = getPiece(move.from);
+
+        removePiece(move.from);
+        setPiece(move.to, piece);
+
+        moves.add(move);
+    }
+
+    public boolean isSquareEmpty(Coordinates coordinates) {
+
+        return !pieces.containsKey(coordinates);
+    }
+
+    public Piece getPiece(Coordinates coordinates) {
+
+        return pieces.get(coordinates);
     }
 
     public void setDefaultPiecesPositions() {
@@ -49,31 +77,11 @@ public class Board {
         setPiece(new Coordinates(File.E, 8), new King(Color.BLACK, new Coordinates(File.E, 8)));
     }
 
-    public boolean isSquareIsEmpty(Coordinates coordinates) {
-        return !pieces.containsKey(coordinates);
-    }
-
-    public Piece getPiece(Coordinates coordinates) {
-        return pieces.get(coordinates);
-    }
-
     public static boolean isSquareDark(Coordinates coordinates) {
         return (((coordinates.file.ordinal() + 1) + coordinates.rank) % 2) == 0;
     }
 
-    public void removePiece(Coordinates coordinates) {
-        pieces.remove(coordinates);
-    }
-
-    public void movePiece(Coordinates from, Coordinates to) {
-        Piece piece = getPiece(from);
-
-        removePiece(from);
-
-        setPiece(to, piece);
-    }
-
-    private List<Piece> getPiecesBeColor(Color color) {
+    public List<Piece> getPiecesByColor(Color color) {
         List<Piece> result = new ArrayList<>();
 
         for (Piece piece : pieces.values()) {
@@ -81,22 +89,20 @@ public class Board {
                 result.add(piece);
             }
         }
+
         return result;
-
-
     }
 
     public boolean isSquareAttackedByColor(Coordinates coordinates, Color color) {//клетка не под боем
-        List<Piece> pieces = getPiecesBeColor(color);
+        List<Piece> pieces = getPiecesByColor(color);
 
 
         for (Piece piece : pieces) {// се фигуры врага
             Set<Coordinates> attackedSquares = piece.getAttackedSquares(this);// куда они могут атаковать || клетки которые атакует вражеская фигура
-            if(attackedSquares.contains(coordinates))
-            {
+
+            if (attackedSquares.contains(coordinates)) {
                 return true;// клекта под боем
             }
-
         }
 
         return false;

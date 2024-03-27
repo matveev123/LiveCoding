@@ -1,26 +1,29 @@
-package livecoding;
+package livecoding.board;
 
-import livecoding.piece.Pawn;
+import livecoding.Coordinates;
+import livecoding.File;
+import livecoding.PieceFactory;
 
 public class BoardFactory {
-    private PieceFactory pieceFactory = new PieceFactory();
 
-    public Board boardFEN(String fen) {
-        Board board = new Board();
+    private final PieceFactory pieceFactory = new PieceFactory();
 
+    public Board fromFEN(String fen) {
+        Board board = new Board(fen);
 
         String[] parts = fen.split(" ");
         String piecePositions = parts[0];
+
         String[] fenRows = piecePositions.split("/");
 
         for (int i = 0; i < fenRows.length; i++) {
-
             String row = fenRows[i];
             int rank = 8 - i;
 
             int fileIndex = 0;
             for (int j = 0; j < row.length(); j++) {// строка
                 char fenChar = row.charAt(j);
+
                 if (Character.isDigit(fenChar)) {
                     fileIndex += Character.getNumericValue(fenChar);
                 } else {
@@ -35,5 +38,15 @@ public class BoardFactory {
         }
 
         return board;
+    }
+
+
+    public Board copy(Board source){
+        Board clone = fromFEN(source.startingFen);
+
+        for (Move move : source.moves) {
+            clone.makeMove(move);//source
+        }
+        return clone;
     }
 }
